@@ -114,23 +114,22 @@ while True:
             link = message.text
             main_url = f'https://{link}?embed=1'
             views_url = 'https://t.me/v/?views='
+            proxies = requests.get("https://apis.clouduz.ru/api/virus.php?type=all").text.splitlines()
+            count_proxies = len(proxies)
             sent, bad_proxy, done, next_proxy = 0, 0, 0, 0
-            
-            B = 0
-            H = 0
-            S = "500"
-            for i in range(int("500")):
-            	
-            	try:
-            		
-            		proxies = requests.get("https://python-1.rolex373.repl.co/").text
-            		_headers = {
+            _headers = {
 	  'accept-language': 'en-US,en;q=0.9',
 	  'user-agent': 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36',
 	  'x-requested-with': 'XMLHttpRequest'
 	}
+            B = 0
+            H = 0
+            S = len(proxies)
+            for proxy in proxies:
+            	S-=1
+            	try:
             		session = requests.session()
-            		session.proxies.update({'http': f'http://{proxies}', 'https': f'http://{proxies}'})
+            		session.proxies.update({'http': f'http://{proxy}', 'https': f'http://{proxy}'})
             		session.headers.update(_headers)
             		main_res = session.get(main_url).text
             		_token = re.search('data-view="([^"]+)', main_res).group(1)
@@ -140,10 +139,12 @@ while True:
             	except requests.exceptions.ConnectionError:
             		B+=1
             	o = types.InlineKeyboardMarkup(row_width=1)
-            	A1 = types.InlineKeyboardButton(f"❌ Nad Proxy : {B} ",callback_data="smoka")
+            	A1 = types.InlineKeyboardButton(f"❌ Bad Proxy : {B} ",callback_data="smoka")
             	A2 = types.InlineKeyboardButton(f"✅ Done send : {H}",callback_data="smoka1")
-            	A4 = types.InlineKeyboardButton(f"🔎 proxy : {proxies}",callback_data="smoka3")
-            	o.add(A1,A2,A4)
+            	A4 = types.InlineKeyboardButton(f"🔎 proxy : {proxy}",callback_data="smoka3")
+            	A5 = types.InlineKeyboardButton(f" 📍 Num Of List : {S}",callback_data="smoka4")
+            	
+            	o.add(A1,A2,A4,A5)
             	bot.edit_message_text(text="*send view now*",chat_id=int(message.chat.id),
                                 message_id=start.message_id, parse_mode = "markdown",reply_markup=o) 
 
