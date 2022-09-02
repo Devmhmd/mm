@@ -1,10 +1,19 @@
 import os
 import time
 import requests
-import telebot
-from telebot import *
-from telebot import util
-from telebot import types
+
+try:
+    import telebot
+    from telebot import *
+    from telebot import util
+    from telebot import types
+except:
+    os.system('pip install telebot')
+    os.system('pip install PyTelegramBotAPI')
+    import telebot
+    from telebot import *
+    from telebot import util
+    from telebot import types
 tokin = "5626665627:AAEA7xieWMo4unQDaaPPAXEY158WwSKsz2E" #tokin bot
 
 def check_user(user_id):
