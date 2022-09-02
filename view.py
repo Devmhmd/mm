@@ -2,14 +2,6 @@ import os
 import time
 import requests
 
-try:
-    import telebot
-    from telebot import *
-    from telebot import util
-    from telebot import types
-except:
-    os.system('pip install telebot')
-    os.system('pip install PyTelegramBotAPI')
     import telebot
     from telebot import *
     from telebot import util
