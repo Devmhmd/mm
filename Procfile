@@ -1,1 +1,1 @@
-worker: python viwe.py
+worker: python view.py
